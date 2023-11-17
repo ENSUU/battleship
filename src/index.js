@@ -1,8 +1,10 @@
 class Ship {
-    constructor(length) {
+    constructor(length, startCoord, direction) {
         this.length = length; 
         this.hitCount = 0; 
         this.sunkStatus = false; 
+        this.startCoord = startCoord; 
+        this.direction = direction; 
     }
 
     hit() {
@@ -16,5 +18,11 @@ class Ship {
         return this.sunkStatus; 
     }
 }; 
+
+class GameBoard {
+    constructor() {
+
+    }
+}
 
 module.exports = Ship; 
