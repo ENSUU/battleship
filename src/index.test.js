@@ -78,12 +78,32 @@ test('Checking if all ships on board sank', () => {
 // So, each player will be connected to a unique Gameboard object? 
 // Boolean to keep track of player turns? 
 
-test('Player class methods and attributes working', () => {
+test('Initialize both player board properly', () => {
     const testPlayerOne = new Player(); 
     const testPlayerTwo = new Player(); 
 
     // Testing the creation of each player's unique Gameboard object 
-    expect(testPlayerOne.board).toStrictEqual(Array.from(Array(10), () => new Array(10))); 
-    
-    
+    // Both .board attributes should be the same 10x10 grid. 
+    expect(testPlayerOne.board).toStrictEqual(testPlayerTwo.board); 
+}) 
+
+test('Player turn alternation working', () => {
+    const testPlayerOne = new Player(); 
+
+    // Testing .current attribute. Used to keep track of which player's turn it is (for now). 
+    expect(testPlayerOne.current).toBe(true); 
+    // After player one completes their turn, .current should be false. 
+    testPlayerOne.attack(); 
+    expect(testPlayerOne.current).toBe(false); 
+})
+
+test('Random choice (for computer) working', () => {
+    const testPlayerOne = new Player(); 
+    const testPlayerTwo = new Player(); 
+
+    // Generates a random attack for the current player. 
+    const randomAttack = testPlayerTwo.randomAttack(); 
+
+    // Attack the randomly generated coordinate. Coordinate should be a valid position on the grid. 
+    expect(testPlayerOne.board.receiveAttack(randomAttack)).toBe(true); 
 })
