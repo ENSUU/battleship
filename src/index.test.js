@@ -1,4 +1,4 @@
-const {Ship, Gameboard} = require('./index'); 
+const {Ship, Gameboard, Player} = require('./index'); 
 
 // Ship Tests
 test('Accessing Ship object .length and .sunkStatus property', () => {
@@ -54,12 +54,14 @@ test("Gameboard's receiveAttack function working properly", () => {
 
     // Testing receiveAttack function of gameboard 
     // - Case 1: Valid coordinate -> Increment ship's hit count by 1. 
-    expect(testBoard.receiveAttack([0,0])).toBe(true); 
+    testBoard.receiveAttack([0,0]);
+    expect(testBoard.grid[0][0]).toBe("X"); 
     expect(testShip.hitCount).toBe(1); 
 
     // - Case 2: Invalid coordinate -> Record missed attack coordinate. 
-    // Probably need an attribute for GameBoard to keep track of this. 
-    expect(testBoard.receiveAttack([5,2])).toBe(false); 
+    // Probably need an attribute for GameBoard to keep track of this.
+    testBoard.receiveAttack([5,2]); 
+    expect(testBoard.grid[5][2]).toBe('.');  
     expect(testBoard.missedShots).toStrictEqual([[5,2]]); 
 }); 
 
@@ -89,12 +91,15 @@ test('Initialize both player board properly', () => {
 
 test('Player turn alternation working', () => {
     const testPlayerOne = new Player(); 
+    testPlayerOne.toggleCurrPlayer(); 
+    const testPlayerTwo = new Player(); 
 
     // Testing .current attribute. Used to keep track of which player's turn it is (for now). 
     expect(testPlayerOne.current).toBe(true); 
     // After player one completes their turn, .current should be false. 
-    testPlayerOne.attack(); 
+    testPlayerOne.move([0,0], testPlayerTwo); 
     expect(testPlayerOne.current).toBe(false); 
+    expect(testPlayerTwo.current).toBe(true);
 })
 
 test('Random choice (for computer) working', () => {
@@ -102,8 +107,17 @@ test('Random choice (for computer) working', () => {
     const testPlayerTwo = new Player(); 
 
     // Generates a random attack for the current player. 
-    const randomAttack = testPlayerTwo.randomAttack(); 
+    // The returned x and y coordinate from .generateRandomAttack method will always be a valid position on the board. 
+    const [randomX, randomY] = testPlayerTwo.generateRandomAttack(); 
 
-    // Attack the randomly generated coordinate. Coordinate should be a valid position on the grid. 
-    expect(testPlayerOne.board.receiveAttack(randomAttack)).toBe(true); 
+    // Ensuring that randomAttack coords are in the range [0, 9]. 
+    expect(randomX).toBeGreaterThanOrEqual(0); 
+    expect(randomX).toBeLessThan(10);
+    expect(randomY).toBeGreaterThanOrEqual(0); 
+    expect(randomY).toBeLessThan(10);
+
+    // Attack the randomly generated coordinate. 
+    // Since neither player has placed a ship yet, all attacks will just be added to .missedShots. 
+    testPlayerOne.board.receiveAttack([randomX, randomY]);
+    expect(testPlayerOne.board.missedShots).toStrictEqual([[randomX, randomY]]);    
 })
