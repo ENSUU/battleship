@@ -49,7 +49,8 @@ class Ship {
 
 class Gameboard {
     constructor() {
-        this.grid = Array.from(Array(10), () => new Array(10)); 
+        // this.grid = Array.from(Array(10), () => new Array(10)); 
+        this.grid = this.create(); 
         this.ships = []; 
         this.gameOver = false; 
         this.missedShots = [];
@@ -91,6 +92,18 @@ class Gameboard {
             }
         }
         this.gameOver = true; 
+    }
+
+    create() {
+        const board = []; 
+        for(let r = 0; r < 9; r++) {
+            let row = []; 
+            for (let c = 0; c < 9; c++) {
+                row.push('.'); 
+            }
+            board.push(row); 
+        }
+        return board; 
     }
 }
 

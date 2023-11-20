@@ -73,3 +73,17 @@ test('Checking if all ships on board sank', () => {
     testBoard.receiveAttack([2,2]); 
     expect(testBoard.gameOver).toBe(true); 
 }); 
+
+// Player Tests
+// So, each player will be connected to a unique Gameboard object? 
+// Boolean to keep track of player turns? 
+
+test('Player class methods and attributes working', () => {
+    const testPlayerOne = new Player(); 
+    const testPlayerTwo = new Player(); 
+
+    // Testing the creation of each player's unique Gameboard object 
+    expect(testPlayerOne.board).toStrictEqual(Array.from(Array(10), () => new Array(10))); 
+    
+    
+})
