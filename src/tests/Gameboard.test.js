@@ -2,7 +2,7 @@ import { Gameboard } from '../factories/Gameboard';
 import { Ship } from '../factories/Ship';
 
 test("Gameboard's receiveAttack function working properly", () => {
-    const testShip = new Ship(3, [0,0], 'top'); 
+    const testShip = new Ship('Submarine', [0,0], 'right'); 
     const testBoard = new Gameboard(); 
     testBoard.add(testShip);
     // The game board will be a 10 x 10 2D array. 
@@ -22,17 +22,18 @@ test("Gameboard's receiveAttack function working properly", () => {
 
 test('Checking if all ships on board sank', () => {
     const testBoard = new Gameboard(); 
-    const testShip = new Ship(1, [2,2], 'top'); 
+    const testShip = new Ship('Patrol Boat', [2,2], 'top'); 
 
     testBoard.add(testShip); 
     expect(testBoard.gameOver).toBe(false); 
 
     testBoard.receiveAttack([2,2]); 
+    testBoard.receiveAttack([2,3]);
     expect(testBoard.gameOver).toBe(true); 
 }); 
 
 test('Adding ship to the gameboard', () => {
-    const testShip = new Ship(1, [2,2], 'top'); 
+    const testShip = new Ship('Battleship', [2,2], 'right'); 
     const testBoard = new Gameboard(); 
 
     testBoard.add(testShip); 
@@ -42,7 +43,7 @@ test('Adding ship to the gameboard', () => {
 test('Place ship at coordinates', () => {
     // For this to work, constructor needs to be updated. 
     // On object construction, need to pass in ship's length, staring coords, and direction from starting coord (top, left, right, bottom);
-    const testShip = new Ship(3, [0, 0], 'right');
+    const testShip = new Ship('Submarine', [0, 0], 'right');
 
-    expect(testShip.coords).toStrictEqual([[0,0], [1,0], [2,0]]); 
+    expect(testShip.coords).toStrictEqual([[0,0], [0,1], [0,2]]); 
 }); 

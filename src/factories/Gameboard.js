@@ -43,20 +43,41 @@ class Gameboard {
     }
     create() {
         const board = []; 
-        for(let r = 0; r < 9; r++) {
+        for(let r = 0; r < 10; r++) {
             let row = []; 
-            for (let c = 0; c < 9; c++) {
+            for (let c = 0; c < 10; c++) {
                 row.push('.'); 
             }
             board.push(row); 
         }
         return board; 
     }
-    isValidMove(x, y) {
-        if (this.grid[x][y] === "X" || this.missedShots.includes([x,y])) 
+    isValidMove(coords) {
+        if (this.grid[coords[0]][coords[1]] === "X" || this.missedShots.includes(coords)) 
             return false; 
         else   
             return true; 
+    }
+    renderDOMGrid(playerIndex) {
+        for (let r = 0; r < 10; r++) {
+            for (let c = 0; c < 10; c++) {
+                const cell = document.querySelectorAll(`[data-coord='[${r},${c}]']`);
+                if (this.grid[r][c] === "O") {
+                    if (cell.length > 1) {
+                        cell[playerIndex].parentElement.classList.add('ship-cell'); 
+                    }
+                    else {
+                        cell.classList.add('ship-cell');
+                    }
+                }
+                if (this.grid[r][c] === "X") {
+                    cell.classList.add('good-attack');
+                }
+                if (this.missedShots.includes([r, c])) {
+                    cell.classList.add('missed-attack'); 
+                }
+            }
+        }
     }
 }; 
 

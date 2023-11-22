@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex; 
+    justify-content: center; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+table {
+    border-spacing: 0;
+}
+
+td {
+    padding: 0; 
+}
+
+main {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    margin: 4rem 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.gameboard-cell {
+    border: 1px solid #b4b4ff;
+    width: 2.5rem; 
+    height: 2.5rem;
+}
+
+.opponent-board h3, .user-board h3 {
+    text-align: center;
+}
+
+.ship-cell {
+    background-color: #b4b4ff;
+    opacity: 0.4;
+}
+
+.missed-attack {
+    background-color: salmon;
+    opacity: 0.4;
+}
+
+.good-attack {
+    background-color: lightgreen; 
+    opacity: 0.4;
+}

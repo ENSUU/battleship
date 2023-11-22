@@ -1,6 +1,15 @@
 class Ship {
-    constructor(length, startCoord, direction) {
-        this.length = length; 
+
+    #shipTypes = {
+        'Carrier': 5, 
+        'Battleship': 4, 
+        'Destroyer': 3, 
+        'Submarine': 3, 
+        'Patrol Boat': 2
+    };
+
+    constructor(type, startCoord, direction) {
+        this.length = this.#shipTypes[type]; 
         this.hitCount = 0; 
         this.sunkStatus = false; 
         this.coords = [startCoord];
@@ -24,7 +33,8 @@ class Ship {
         if (this.length < 2) return; 
 
         // Depending on the direction specified, the ship's offset will either increment or decrement the x or y coordinate. 
-        const offsets = [[0, 1], [-1, 0], [1, 0], [0, -1]]; 
+                        // top     left     right   bottom
+        const offsets = [[-1, 0], [0, -1], [0, 1], [1, 0]];  
 
         // Determining the ship's offset depending on the direction specified. 
         let shipOffset; 

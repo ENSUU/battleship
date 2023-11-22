@@ -1,8 +1,9 @@
 import { Player } from '../factories/Player';
+import { Ship } from '../factories/Ship';
 
 test('Initialize both player board properly', () => {
-    const testPlayerOne = new Player(); 
-    const testPlayerTwo = new Player(); 
+    const testPlayerOne = new Player('Player 1', false); 
+    const testPlayerTwo = new Player('Player 2', false); 
 
     // Testing the creation of each player's unique Gameboard object 
     // Both .board attributes should be the same 10x10 grid. 
@@ -10,9 +11,9 @@ test('Initialize both player board properly', () => {
 }) 
 
 test('Player turn alternation working', () => {
-    const testPlayerOne = new Player(); 
+    const testPlayerOne = new Player('Player 1', false); 
     testPlayerOne.toggleCurrPlayer(); 
-    const testPlayerTwo = new Player(); 
+    const testPlayerTwo = new Player('Player 2', false);  
 
     // Testing .current attribute. Used to keep track of which player's turn it is (for now). 
     expect(testPlayerOne.current).toBe(true); 
@@ -23,8 +24,8 @@ test('Player turn alternation working', () => {
 })
 
 test('Random choice (for computer) working', () => {
-    const testPlayerOne = new Player(); 
-    const testPlayerTwo = new Player(); 
+    const testPlayerOne = new Player('Player 1', false); 
+    const testPlayerTwo = new Player('Player 2', false); 
 
     // Generates a random attack for the current player. 
     // The returned x and y coordinate from .generateRandomAttack method will always be a valid position on the board. 
@@ -41,3 +42,10 @@ test('Random choice (for computer) working', () => {
     testPlayerOne.board.receiveAttack([randomX, randomY]);
     expect(testPlayerOne.board.missedShots).toStrictEqual([[randomX, randomY]]);    
 }); 
+
+test('Player adding ship working correctly', () => {
+    const testPlayerOne = new Player('Player 1', false); 
+
+    testPlayerOne.setShip('Carrier', [2,4], 'right'); 
+    expect(testPlayerOne.board.ships.length).toBe(1);
+})
