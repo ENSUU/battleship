@@ -1,3 +1,3 @@
-# odin-battleship
+# battleship 
 
-* Work in progress *
+## [Preview](https://ensuu.github.io/battleship/)
