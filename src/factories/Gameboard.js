@@ -30,16 +30,16 @@ class Gameboard {
         // Otherwise, add the attack to missedShots
         else {
             this.missedShots.push(coord); 
+            this.grid[coord[0]][coord[1]] = "-";
         }
     }
     checkGameOver() {
+        let sunkCount = 0; 
         for (const ship of this.ships) {
-            for (const coord of ship.coords) {
-                if (this.grid[coord[0]][coord[1]] === "O")
-                    this.gameOver = false; 
-            }
+            if (ship.hitCount === ship.length) sunkCount += 1; 
         }
-        this.gameOver = true; 
+
+        sunkCount === this.ships.length ? this.gameOver = true : this.gameOver = false; 
     }
     create() {
         const board = []; 
@@ -53,32 +53,11 @@ class Gameboard {
         return board; 
     }
     isValidMove(coords) {
-        if (this.grid[coords[0]][coords[1]] === "X" || this.missedShots.includes(coords)) 
+        if (this.grid[coords[0]][coords[1]] === "X" || this.missedShots.includes(coords) || this.grid[coords[0]][coords[1]] === "-") 
             return false; 
         else   
             return true; 
     }
-    renderDOMGrid(playerIndex) {
-        for (let r = 0; r < 10; r++) {
-            for (let c = 0; c < 10; c++) {
-                const cell = document.querySelectorAll(`[data-coord='[${r},${c}]']`);
-                if (this.grid[r][c] === "O") {
-                    if (cell.length > 1) {
-                        cell[playerIndex].parentElement.classList.add('ship-cell'); 
-                    }
-                    else {
-                        cell.classList.add('ship-cell');
-                    }
-                }
-                if (this.grid[r][c] === "X") {
-                    cell.classList.add('good-attack');
-                }
-                if (this.missedShots.includes([r, c])) {
-                    cell.classList.add('missed-attack'); 
-                }
-            }
-        }
-    }
 }; 
 
-export {Gameboard};
+export { Gameboard };

@@ -7,34 +7,27 @@ class Player {
         this.name = name;
         this.board = new Gameboard();
         this.index = index; 
-        this.current = false; 
-        this.won = false; 
     }
 
-    generateRandomAttack() {
-        let randomX = Math.floor(Math.random() * 10); 
-        let randomY = Math.floor(Math.random() * 10); 
+    generateRandomAttack(opponent) {
+        // How to generate random number between a specific range (inclusive): Math.floor(Math.random() * (max - min + 1) + min)
+        let randomX = Math.floor(Math.random() * (9 - 0 + 1) + 0); 
+        let randomY = Math.floor(Math.random() * (9 - 0 + 1) + 0); 
 
-        while (!this.board.isValidMove([randomX, randomY])) {
-            randomX = Math.floor(Math.random * 10);
-            randomY = Math.floor(Math.random * 10); 
+        while (!opponent.board.isValidMove([randomX, randomY])) {
+            randomX = Math.floor(Math.random() * (9 - 0 + 1) + 0);
+            randomY = Math.floor(Math.random() * (9 - 0 + 1) + 0); 
         }
 
         return [randomX, randomY]; 
     }
 
-    move(coord, enemy) {
-        this.toggleCurrPlayer();  
+    move(coord, enemy) { 
         enemy.board.receiveAttack(coord); 
-        enemy.toggleCurrPlayer(); 
     }
 
-    toggleCurrPlayer() {
-        this.current === false ? this.current = true : this.current = false; 
-    }
-
-    setShip(type, startCoord, direction) {
-        const newShip = new Ship(type, startCoord, direction); 
+    setShip(type, startCoord, isHorizontal) {
+        const newShip = new Ship(type, startCoord, isHorizontal); 
         this.board.add(newShip);
     }
 }

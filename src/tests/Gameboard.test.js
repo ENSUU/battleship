@@ -16,13 +16,13 @@ test("Gameboard's receiveAttack function working properly", () => {
     // - Case 2: Invalid coordinate -> Record missed attack coordinate. 
     // Probably need an attribute for GameBoard to keep track of this.
     testBoard.receiveAttack([5,2]); 
-    expect(testBoard.grid[5][2]).toBe('.');  
+    expect(testBoard.grid[5][2]).toBe('-');  
     expect(testBoard.missedShots).toStrictEqual([[5,2]]); 
 }); 
 
 test('Checking if all ships on board sank', () => {
     const testBoard = new Gameboard(); 
-    const testShip = new Ship('Patrol Boat', [2,2], 'top'); 
+    const testShip = new Ship('patrol', [2,2], true); 
 
     testBoard.add(testShip); 
     expect(testBoard.gameOver).toBe(false); 
@@ -43,7 +43,7 @@ test('Adding ship to the gameboard', () => {
 test('Place ship at coordinates', () => {
     // For this to work, constructor needs to be updated. 
     // On object construction, need to pass in ship's length, staring coords, and direction from starting coord (top, left, right, bottom);
-    const testShip = new Ship('Submarine', [0, 0], 'right');
+    const testShip = new Ship('submarine', [0, 0], true);
 
     expect(testShip.coords).toStrictEqual([[0,0], [0,1], [0,2]]); 
 }); 
