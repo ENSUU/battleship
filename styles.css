@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex; 
+    justify-content: center; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+table {
+    border-spacing: 0;
+}
+
+td {
+    padding: 0; 
+}
+
+main {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+button {
+    background: none; 
+    border: 1px solid black;
+    font-family: 'Poppins', sans-serif;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+button:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.gameboard-cell, .opponent-gameboard-cell {
+    border: 1px solid #b4b4ff;
+    width: 2.5rem; 
+    height: 2.5rem;
+}
+
+.gameboard-cell-content, .opponent-gameboard-cell-content {
+    width: 2.5rem; 
+    height: 2.5rem;
+}
+
+.opponent-board h3, .user-board h3 {
+    text-align: center;
+}
+
+.missed-attack {
+    background-color: salmon !important;
+    opacity: 0.4;
+}
+
+.good-attack {
+    background-color: lightgreen !important; 
+    opacity: 0.4;
+}
+
+.ships-container, .game-controls {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.game-controls {
+    gap: 12px;
+}
+
+.ships-container {
+    margin: 1rem;
+    gap: 12px;
+}
+
+.ship {
+    background-color: #b4b4ff;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.patrol {
+    height: 2.6rem;
+    width: calc(2.6rem * 2); 
+}
+
+.patrol-vertical {
+    height: calc(2.6rem * 2); 
+    width: 2.6rem;
+}
+
+.submarine {
+    height: 2.6rem;
+    width: calc(2.6rem * 3); 
+}
+
+.submarine-vertical {
+    height: calc(2.6rem * 3); 
+    width: 2.6rem;
+}
+
+.destroyer {
+    height: 2.6rem;
+    width: calc(2.6rem * 3); 
+}
+
+.destroyer-vertical {
+    height: calc(2.6rem * 3); 
+    width: 2.6rem;
+}
+
+.battleship {
+    height: 2.6rem;
+    width: calc(2.6rem * 4); 
+}
+
+.battleship-vertical {
+    height: calc(2.6rem * 4); 
+    width: 2.6rem;
+}
+
+.carrier {
+    height: 2.6rem;
+    width: calc(2.6rem * 5); 
+}
+
+.carrier-vertical {
+    width: 2.6rem;
+    height: calc(2.6rem * 5); 
+}
+
+.hidden {
+    display: none;
+}
+
+.game-text {
+    text-align: center;
+}
